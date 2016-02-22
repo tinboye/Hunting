@@ -11,7 +11,7 @@ _shoremode = 0; // 0: does not have to be at a shore , 1: must be at a shore
 if (aliveArray < maxAnimals) then
 {	
 	//_amountToSpawn = maxAnimals - count animalArray;
-	_amountToSpawn = maxAnimals - animalCount;
+	_amountToSpawn = maxAnimals - aliveArray;
 	diag_log format ["Remaining animals to spawn:%1 animals",_amountToSpawn];
 
 	for "_i" from 1 to _amountToSpawn do
