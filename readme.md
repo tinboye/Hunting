@@ -7,7 +7,7 @@ Add contents to your mission file
 Inisde your init.sqf -
 
 JohnO_fnc_spawnAnimals = compileFinal preprocessFileLineNumbers "JohnO_fnc_spawnAnimals.sqf";
-JohnO_fnc_isSick = compileFinal preprocessFileLineNumbers "unrest\functions\JohnO_fnc_isSick.sqf";
+JohnO_fnc_isSick = compileFinal preprocessFileLineNumbers "JohnO_fnc_isSick.sqf";
 
 [] execVM "config_animals.sqf";
 
