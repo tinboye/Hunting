@@ -9,7 +9,13 @@ Inisde your init.sqf -
 JohnO_fnc_spawnAnimals = compileFinal preprocessFileLineNumbers "JohnO_fnc_spawnAnimals.sqf";
 JohnO_fnc_isSick = compileFinal preprocessFileLineNumbers "JohnO_fnc_isSick.sqf";
 
+In your initServer.sqf -
+
 [] execVM "config_animals.sqf";
+
+OR in your init.sqf
+
+if (isServer) then {[] execVM "config_animals.sqf";};
 
 Inside your mission config.cpp -
 
