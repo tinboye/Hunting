@@ -18,7 +18,7 @@ if (aliveArray < maxAnimals) then
 	{	
 
 		//_animal = _animalArray call BIS_fnc_SelectRandom;
-		//_animalSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
+		_animalSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
 
 		_goat = createAgent ["Cock_white_F", _animalSpawn, [], 5, "CAN_COLLIDE"];
 
