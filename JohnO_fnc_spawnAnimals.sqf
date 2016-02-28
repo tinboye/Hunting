@@ -7,7 +7,7 @@ _mindist = 2; // minimum distance from the nearest object (Number) in meters, ie
 _water = 0; // water mode 0: cannot be in water , 1: can either be in water or not , 2: must be in water
 _shoremode = 0; // 0: does not have to be at a shore , 1: must be at a shore
 
-_animalArray = ["Cock_white_F","Rabbit_F","Hen_random_F","Cock_random_F","Goat_random_F","Sheep_random_F"];
+//_animalArray = ["Cock_white_F","Rabbit_F","Hen_random_F","Cock_random_F","Goat_random_F","Sheep_random_F"];
 
 if (aliveArray < maxAnimals) then
 {	
@@ -17,10 +17,10 @@ if (aliveArray < maxAnimals) then
 	for "_i" from 1 to _amountToSpawn do
 	{	
 
-		_animal = _animalArray call BIS_fnc_SelectRandom;
-		_animalSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
+		//_animal = _animalArray call BIS_fnc_SelectRandom;
+		//_animalSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
 
-		_goat = createAgent [_animal, _animalSpawn, [], 5, "CAN_COLLIDE"];
+		_goat = createAgent ["Cock_white_F", _animalSpawn, [], 5, "CAN_COLLIDE"];
 
 		_goat addMPEventHandler["MPKilled",
 		{
