@@ -1,5 +1,12 @@
 private ["_consume","_chanceForSick","_protected"];
 
+playerRequiresKnife = false;
+
+if ("Exile_Item_Knife" in (magazines player)) then
+{
+	playerRequiresKnife = true;
+};
+
 if (playerRequiresKnife) then
 {
 

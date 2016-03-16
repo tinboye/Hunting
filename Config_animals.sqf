@@ -2,7 +2,6 @@ uiSleep 30;
 
 maxAnimals = 75;
 debug = false; //Dodgy but gives you an indication its working
-playerRequiresKnife = true;
 
 //Dont change
 animalCount = 0;
