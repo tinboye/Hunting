@@ -56,31 +56,3 @@ if (aliveArray < maxAnimals) then
 	};
 };
 diag_log format ["Current amount of Spawned animals:%1",aliveArray];
-
-if (aliveDogs < maxDogs) then
-{	
-	_dogsToSpawn = maxdogs - aliveDogs;
-	diag_log format ["Remaining dogs to spawn:[%1] dogs -- Current amount spawned [%2]",_dogsToSpawn,aliveDogs];
-
-	for "_i" from 1 to _dogsToSpawn do
-	{	
-		_dogSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
-
-		_dogArray = ["Alsatian_Random_F","Alsatian_Sandblack_F","Alsatian_Black_F","Alsatian_Sand_F","Fin_tricolour_F","Fin_ocherwhite_F"];
-
-		_randomDog = selectRandom _dogArray;
-
-		_dog = createAgent [_randomDog, _dogSpawn, [], 5, "CAN_COLLIDE"];
-
-		_dog addMPEventHandler["MPKilled",
-		{
-			aliveDogs = aliveDogs - 1;
-		}];
-
-		aliveDogs = aliveDogs + 1;
-
-		diag_log format ["Spawned a dog at:[%1]",_dogSpawn];
-	};
-};	
-
-diag_log format ["Current amount of Spawned DOGS:[%1]",aliveDogs];
