@@ -1,4 +1,4 @@
-private ["_goat","_animalSpawn","_animalArray","_animal"];
+private ["_goat","_animalSpawn","_animal","_animalskin","_randomskin"];
 _spawnCenter = [6133,7156,0]; //Center of your map -- this is Stratis 
 _min = 1; // minimum distance from the center position (Number) in meters
 _max = 5120; // maximum distance from the center position (Number) in meters
@@ -15,38 +15,36 @@ if (aliveArray < maxAnimals) then
 		_animal = _animalArray call BIS_fnc_SelectRandom;
 		_animalSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
 		_goat = createAgent [_animal, _animalSpawn, [], 5, "CAN_COLLIDE"];
-		_goat addMPEventHandler["MPKilled",{aliveArray = aliveArray - 1;}];
 		_animalskin = nil;
-		_sheepskin = [
+
+		if (TypeOf _goat == "Sheep_random_F") then 
+		{
+				_sheepskin = [
 		"brown_sheep_co",
 		"blackwhite_sheep_co",
 		"sheep_co",
-		"white_sheep_co"];
+		"white_sheep_co"] call BIS_fnc_selectRandom;
+		_animalskin = format ["\A3\animals_f_beta\Sheep\data\%1.paa",_sheepskin];		
+		} else {
 		
+		if (TypeOf _goat == "Goat_random_F") then 
+		{
 		_goatskin = [
 		"black_goat_co",
 		"goat_co",
 		"old_goat_co",
-		"white_goat_co"];
-
-		if (TypeOf _goat == "Sheep_random_F") then 
-		{
-
-		_randomskin = _sheepskin call BIS_fnc_SelectRandom;
-		_animalskin = format ["\A3\animals_f_beta\Sheep\data\%1.paa",_randomskin];		
-		} else {
-		if (TypeOf _goat == "Goat_random_F") then 
-		{
-		_randomskin = _goatskin call BIS_fnc_SelectRandom;
-		_animalskin = format ["\A3\animals_f_beta\Goat\data\%1.paa",_randomskin];
+		"white_goat_co"] call BIS_fnc_selectRandom;
+		_animalskin = format ["\A3\animals_f_beta\Goat\data\%1.paa",_goatskin];
 			};
 		};
 		
 		if !(isNil "_animalskin") then {
-		_goat setObjectTexture [0, _animalskin];
+		_goat setObjectTextureGlobal [0, _animalskin];
 		};
-		
+
+		_goat addMPEventHandler["MPKilled",{aliveArray = aliveArray - 1;}];
 		aliveArray = aliveArray + 1;
+		diag_log format ["Spawned a %1 at:[%2]",_animal,_animalSpawn];		
 		if (debug) then
 		{	
 		_sheepMarker = createMarker ["Sheep",_animalSpawn];
@@ -56,3 +54,31 @@ if (aliveArray < maxAnimals) then
 	};
 };
 diag_log format ["Current amount of Spawned animals:%1",aliveArray];
+
+if (aliveDogs < maxDogs) then
+{	
+	_dogsToSpawn = maxdogs - aliveDogs;
+	diag_log format ["Remaining dogs to spawn:[%1] dogs -- Current amount spawned [%2]",_dogsToSpawn,aliveDogs];
+
+	for "_i" from 1 to _dogsToSpawn do
+	{	
+		_dogSpawn = [_spawnCenter,_min,_max,_mindist,_water,1,_shoremode] call BIS_fnc_findSafePos;
+
+		_dogArray = ["Alsatian_Random_F","Alsatian_Sandblack_F","Alsatian_Black_F","Alsatian_Sand_F","Fin_tricolour_F","Fin_ocherwhite_F"];
+
+		_randomDog = selectRandom _dogArray;
+
+		_dog = createAgent [_randomDog, _dogSpawn, [], 5, "CAN_COLLIDE"];
+
+		_dog addMPEventHandler["MPKilled",
+		{
+			aliveDogs = aliveDogs - 1;
+		}];
+
+		aliveDogs = aliveDogs + 1;
+
+		diag_log format ["Spawned a dog at:[%1]",_dogSpawn];
+	};
+};	
+
+diag_log format ["Current amount of Spawned DOGS:[%1]",aliveDogs];
