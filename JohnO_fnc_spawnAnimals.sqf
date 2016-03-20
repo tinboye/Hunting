@@ -1,4 +1,4 @@
-private ["_goat","_animalSpawn"];
+private ["_goat","_animalSpawn","_animalArray","_animal"];
 _spawnCenter = [6133,7156,0]; //Center of your map -- this is Stratis 
 _min = 1; // minimum distance from the center position (Number) in meters
 _max = 5120; // maximum distance from the center position (Number) in meters
